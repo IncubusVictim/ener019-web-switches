@@ -4,8 +4,10 @@
 <a href="https://buymeacoffee.com/incubusvictim" target="_blank"><img align="top" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> <img align="top" src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/bmc_qr.png" width="100" />
 </div>
 
+<img align="middle" src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/static/ener019.png" width="400" />
+
 ## Description
-A clean, dark-themed web interface to control an **Energenie ENER019** (EG-PMS-LAN) 4-socket power strip over the local network.
+A clean, dark-themed web interface to control an **Energenie ENER019** 4-socket power strip over the local network.
 
 The frontend is a simple responsive HTML page.
 
@@ -41,9 +43,9 @@ The backend is a small Python Flask application that talks to the device using i
 ener019-control/
 ├── app.py                          # Flask backend
 ├── static/
+│   └── ener019.png                 # Sample ENER019 image
 │   └── socketdark-192.png          # Smaller icon
 │   └── socketdark-512.png          # Larger icon
-│   └── sockets.json                # Configurable socket names
 ├── templates/
 │   └── index.html                  # Dark-theme frontend
 └── README.md                       # This file
