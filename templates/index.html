@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <title>ENER019 Switches</title>
+
+  <!-- Theme colour (Android + browser UI) -->
+  <meta name="theme-color" content="#121212">
+  <meta name="msapplication-TileColor" content="#121212">
+
+  <!-- iOS specific -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ENER019">
+
+  <!-- Android / general -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="ENER019 Switches">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/socketdark-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/socketdark-512.png">
+  <link rel="apple-touch-icon" href="/static/socketdark-192.png">
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      padding: 20px 16px;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      border: 1px solid #2a2a2a;
+    }
+
+    .label {
+      font-size: 1.05rem;
+      font-weight: 500;
+      flex: 1;
+      padding-right: 16px;
+      color: #e0e0e0;
+    }
+
+    .toggle {
+      position: relative;
+      width: 56px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #c0392b;
+      border-radius: 32px;
+      transition: background-color 0.25s ease;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 26px;
+      width: 26px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.25s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    input:checked + .slider {
+      background-color: #27ae60;
+    }
+
+    input:checked + .slider::before {
+      transform: translateX(24px);
+    }
+
+    #status {
+      margin-top: 28px;
+      font-size: 0.9rem;
+      color: #aaaaaa;
+      text-align: center;
+      min-height: 1.4em;
+    }
+  </style>
+
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+</head>
+<body>
+
+  <h1>ENER019 Switches</h1>
+
+  {% for key, icon in icons.items() %}
+  <div class="switch-row">
+    <span class="label">{{ icon.name }}</span>
+    <label class="toggle">
+      <input type="checkbox" id="sw{{ loop.index }}" onchange="handleSwitch({{ loop.index }}, this.checked)">
+      <span class="slider"></span>
+    </label>
+  </div>
+  {% endfor %}
+
+  <div id="status">Loading…</div>
+
+  <script>
+    async function api(method, path, body = null) {
+      const opts = {
+        method,
+        headers: { "Content-Type": "application/json" }
+      };
+      if (body !== null) opts.body = JSON.stringify(body);
+
+      try {
+        const res = await fetch(path, opts);
+        const data = await res.json();
+        return { ok: res.ok && data.ok, status: res.status, data };
+      } catch (err) {
+        return { ok: false, status: 0, data: { error: err.message } };
+      }
+    }
+
+    async function handleSwitch(id, isOn) {
+      const statusEl = document.getElementById("status");
+      statusEl.textContent = `Socket ${id} → ${isOn ? "ON" : "OFF"} …`;
+
+      const result = await api("POST", "/api/switch", {
+        id: id,
+        state: isOn
+      });
+
+      if (result.ok) {
+        statusEl.textContent = `Socket ${id} set to ${isOn ? "ON" : "OFF"} ✓`;
+      } else {
+        statusEl.textContent = `Error: ${result.data.error || "unknown"}`;
+        // revert the visual switch
+        document.getElementById("sw" + id).checked = !isOn;
+      }
+    }
+
+    async function loadInitialStates() {
+      const statusEl = document.getElementById("status");
+      statusEl.textContent = "Loading switch states…";
+
+      const result = await api("GET", "/api/status");
+
+      if (!result.ok) {
+        statusEl.textContent = `Failed to load: ${result.data.error || "device unreachable"}`;
+        return;
+      }
+
+      const switches = result.data.switches;
+      for (let id = 1; id <= 4; id++) {
+        const el = document.getElementById("sw" + id);
+        if (el) el.checked = !!switches[id];
+      }
+      statusEl.textContent = "Ready";
+    }
+
+    document.addEventListener("DOMContentLoaded", loadInitialStates);
+  </script>
+</body>
+</html>
