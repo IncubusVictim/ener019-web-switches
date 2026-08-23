@@ -1,20 +1,20 @@
 # ENER019 Control Panel
 
 <div align="right">
-<a href="https://buymeacoffee.com/incubusvictim" target="_blank"><img align="top" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> <img align="top" src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_images/bmc_qr.png" width="100" />
+<a href="https://buymeacoffee.com/incubusvictim" target="_blank"><img align="top" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> <img align="top" src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/bmc_qr.png" width="100" />
 </div>
 
 <p>
 <table width="100%">
   <tr>
     <td align="center" valign="middle" width="30%">
-      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_images/mobile_screenshot.png" alt="Screenshot example">
+      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/mobile_screenshot.png" alt="Screenshot example">
     </td>
     <td align="center" valign="middle" width="18%">
-      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_images/arrow_right.png">
+      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/arrow_right.png">
     </td>
     <td align="center" valign="middle" width="30%">
-      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_images/ener019.png" alt="Ener019">
+      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/ener019.png" alt="Ener019">
     </td>
   </tr>
 </table>
