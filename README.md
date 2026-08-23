@@ -4,24 +4,13 @@
 <a href="https://buymeacoffee.com/incubusvictim" target="_blank"><img align="top" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> <img align="top" src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/bmc_qr.png" width="100" />
 </div>
 
-<style>
-td, th {
-   border: none!important;
-}
-</style>
-<table width="100%">
-  <tr>
-    <td align="center" valign="middle" width="30%">
-      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/mobile_screenshot.png" alt="Screenshot example">
-    </td>
-    <td align="center" valign="middle" width="18%">
-      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/arrow_right.png">
-    </td>
-    <td align="center" valign="middle" width="30%">
-      <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/ener019.png" alt="Ener019">
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/mobile_screenshot.png" width="300" alt="Screenshot" align="middle">
+  &nbsp;&nbsp;
+  <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/arrow_right.png" width="80" alt="Arrow" align="middle">
+  &nbsp;&nbsp;
+  <img src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/ener019.png" width="300" alt="Ener019" align="middle">
+</p>
 
 ## Description
 A clean, dark-themed web interface to control an **Energenie ENER019** 4-socket power strip over the local network.
