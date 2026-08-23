@@ -4,7 +4,11 @@
 <a href="https://buymeacoffee.com/incubusvictim" target="_blank"><img align="top" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> <img align="top" src="https://github.com/IncubusVictim/ener019-web-switches/blob/main/github_static/bmc_qr.png" width="100" />
 </div>
 
-<p>
+<style>
+td, th {
+   border: none!important;
+}
+</style>
 <table width="100%">
   <tr>
     <td align="center" valign="middle" width="30%">
@@ -18,7 +22,6 @@
     </td>
   </tr>
 </table>
-</p>
 
 ## Description
 A clean, dark-themed web interface to control an **Energenie ENER019** 4-socket power strip over the local network.
